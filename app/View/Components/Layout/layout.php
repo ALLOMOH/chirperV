@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Layoute;
+namespace App\View\Components\Layout;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class layoute extends Component
+class layout extends Component
 {
     /**
      * Create a new component instance.
