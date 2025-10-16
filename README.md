@@ -1,61 +1,190 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ChirperV - Réseau Social Laravel
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://img.shields.io/badge/Laravel-11.x-red.svg" alt="Laravel Version">
+    <img src="https://img.shields.io/badge/PHP-8.2+-blue.svg" alt="PHP Version">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
 </p>
 
-## About Laravel
+## 📋 Description
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ChirperV est une application de réseau social développée avec Laravel 11, permettant aux utilisateurs de partager de courts messages appelés "chirps". L'application offre une expérience similaire à Twitter mais avec une architecture Laravel moderne et sécurisée.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Fonctionnalités
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **🔐 Système d'authentification complet**
+  - Inscription et connexion sécurisées
+  - Gestion des sessions utilisateur
+  - Protection CSRF
 
-## Learning Laravel
+- **🐦 Gestion des Chirps**
+  - Création de messages (255 caractères maximum)
+  - Édition et suppression de ses propres chirps
+  - Affichage chronologique des messages
+  - Interface utilisateur moderne avec DaisyUI
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **👤 Gestion des utilisateurs**
+  - Profils utilisateur avec avatars Gravatar
+  - Autorisations et politiques de sécurité
+  - Validation des données
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **🎨 Interface moderne**
+  - Design responsive avec Tailwind CSS
+  - Composants réutilisables avec Blade
+  - Thème personnalisable avec DaisyUI
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🛠️ Technologies utilisées
 
-## Laravel Sponsors
+- **Backend** : Laravel 11
+- **Base de données** : SQLite (développement) / Compatible MySQL/PostgreSQL
+- **Frontend** : Blade templates, Tailwind CSS, DaisyUI
+- **Outils de développement** : Vite, Laravel Mix
+- **Sécurité** : Policies Laravel, validation des données
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Installation
 
-### Premium Partners
+### Prérequis
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- PHP 8.2 ou supérieur
+- Composer
+- Node.js et npm
+- Git
 
-## Contributing
+### Étapes d'installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Cloner le repository**
+   ```bash
+   git clone https://github.com/ALLOMOH/chirperV.git
+   cd chirperV
+   ```
 
-## Code of Conduct
+2. **Installer les dépendances PHP**
+   ```bash
+   composer install
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Configurer l'environnement**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+4. **Configurer la base de données**
+   ```bash
+   # Créer la base de données SQLite
+   touch database/database.sqlite
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   # Migrer les tables
+   php artisan migrate
 
-## License
+   # Optionnel : Ajouter des données de test
+   php artisan db:seed
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Installer les dépendances JavaScript**
+   ```bash
+   npm install
+   npm run build
+   ```
+
+6. **Démarrer le serveur**
+   ```bash
+   php artisan serve
+   ```
+
+L'application sera accessible sur `http://localhost:8000`
+
+## 📁 Structure du projet
+
+```
+chirperV/
+├── app/
+│   ├── Http/Controllers/     # Contrôleurs de l'application
+│   ├── Models/              # Modèles Eloquent
+│   ├── Policies/            # Politiques d'autorisation
+│   └── View/Components/     # Composants Blade
+├── database/
+│   ├── migrations/          # Migrations de base de données
+│   └── seeders/             # Seeders pour les données de test
+├── public/                  # Fichiers publics
+├── resources/
+│   ├── css/                 # Styles CSS
+│   ├── js/                  # JavaScript
+│   └── views/               # Templates Blade
+├── routes/
+│   └── web.php              # Routes web
+├── storage/                 # Fichiers générés
+└── tests/                   # Tests automatisés
+```
+
+## 🔒 Sécurité
+
+- **Authentification** : Système complet avec guards Laravel
+- **Autorisations** : Policies pour contrôler l'accès aux ressources
+- **Validation** : Validation stricte des données utilisateur
+- **CSRF Protection** : Protection contre les attaques CSRF
+- **XSS Protection** : Échappement automatique des sorties
+
+## 🧪 Tests
+
+```bash
+# Lancer tous les tests
+php artisan test
+
+# Tests avec coverage
+php artisan test --coverage
+
+# Tests spécifiques
+php artisan test --filter=FeatureTest
+```
+
+## 🚀 Déploiement
+
+### Configuration de production
+
+1. **Variables d'environnement**
+   ```env
+   APP_ENV=production
+   APP_DEBUG=false
+   APP_URL=https://yourdomain.com
+   ```
+
+2. **Base de données**
+   ```bash
+   php artisan config:cache
+   php artisan route:cache
+   php artisan view:cache
+   ```
+
+3. **Serveur web**
+   - Configurer un serveur Nginx/Apache
+   - Pointer vers le dossier `public/`
+   - Configurer les permissions des dossiers `storage/` et `bootstrap/cache/`
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! Merci de suivre ces étapes :
+
+1. Fork le projet
+2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📝 License
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 🙏 Remerciements
+
+- [Laravel](https://laravel.com) - Le framework web PHP
+- [DaisyUI](https://daisyui.com) - Composants UI Tailwind CSS
+- [Tailwind CSS](https://tailwindcss.com) - Framework CSS utilitaire
+
+## 📞 Contact
+
+Développé par [ALLOMOH](https://github.com/ALLOMOH)
+
+---
+
+⭐ Si ce projet vous plaît, n'hésitez pas à lui donner une étoile !

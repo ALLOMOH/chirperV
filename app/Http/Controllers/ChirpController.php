@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ChirpController extends Controller
 {
@@ -17,7 +20,7 @@ class ChirpController extends Controller
             ->take(50)
             ->get();
 
-        return view('home',compact('chirps'));
+        return view('home',['chirps'=>$chirps]);
     }
 
     /**
@@ -34,19 +37,13 @@ class ChirpController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'message'=>'required|string|max:255'
-        ],[
+            'message' => 'required|string|max:255'
+        ], [
             'message.required' => 'Please write something to chirp!',
-            'message.max' =>'Chirps must be 255 Characters or less.',
-        ]
-
-    );
-
-
-        Chirp::create([
-            'message' => $validated['message'],
-            'user_id' => null,
+            'message.max' => 'Chirps must be 255 Characters or less.',
         ]);
+
+        auth()->user()->chirps()->create($validated);
 
         return redirect('/')->with('success','Your chirp has been posted!');
     }
@@ -62,9 +59,13 @@ class ChirpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chirp $chrips)
+    public function edit(Chirp $chirp)
     {
-        return view('chirps.edit',compact('chirps'));
+        if($chirp->user_id !== auth()->id()){
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('components.chirps.edit',compact('chirp'));
     }
 
     /**
@@ -72,13 +73,20 @@ class ChirpController extends Controller
      */
     public function update(Request $request, Chirp $chirp)
     {
+
+
+        if ($chirp->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
-            'message'=>'required|string|max:255',
+            'message'=>'required|string|max:255'
         ]);
 
         $chirp->update($validated);
 
         return redirect('/')->with('success','Chirp updated!');
+
     }
 
     /**
@@ -86,8 +94,11 @@ class ChirpController extends Controller
      */
     public function destroy(Chirp $chirp)
     {
+        if($chirp->user_id !== auth()->id()){
+            abort(403, 'Unauthorized ');
+        }
 
-        $chirp->detete();
+        $chirp->delete();
 
         return redirect('/')->with('success','Chirp deleted!');
 
