@@ -15,7 +15,7 @@
         }
     ],
     "env": {
-        "APP_NAME": "Vercel Laravel",
+        "APP_NAME": "Chirer",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://php-laravel.vercel.app",
