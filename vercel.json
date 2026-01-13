@@ -1,5 +1,5 @@
 {
-    "$schama":"https://openapi.vercel.sh/vercel.json",
+    "schama":"https://openapi.vercel.sh/vercel.json",
     "outputDirectory":"public",
     "functions":{
         "api/lambda.php":{
